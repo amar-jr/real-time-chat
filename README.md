@@ -1,16 +1,66 @@
-# React + Vite
+# Real-Time Chat Application 💬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time chat application built as a learning project using React, Vite, Node.js, Express, and Socket.IO.
 
-Currently, two official plugins are available:
+🚧 **Work in Progress:** This project currently implements the basic features of a real-time chat application. I'm building it incrementally to understand frontend development, backend APIs, and real-time communication. More features, improvements, and enhancements will be added as development continues.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Current Features
 
-## React Compiler
+- Real-time messaging between multiple users
+- React-based chat interface
+- Express REST API for sending and retrieving messages
+- Socket.IO for live message broadcasting
+- User IDs and usernames associated with messages
+- Message history stored in backend memory
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend:** React, JavaScript, Vite
+- **Backend:** Node.js, Express
+- **Real-time communication:** Socket.IO
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_REPOSITORY_URL
+cd real-time-chat
+```
+
+### 2. Install frontend dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the frontend
+
+```bash
+npm run dev
+```
+
+### 4. Start the backend
+
+Open a second terminal:
+
+```bash
+cd server
+npm install
+node server.js
+```
+
+The frontend runs at `http://localhost:5173`, and the backend runs at `http://localhost:3000`.
+
+## Current Limitations
+
+- Messages are stored in backend memory and may be lost when the server restarts.
+- The application is under active development, and additional features are planned.
+
+## Future Improvements
+
+This section will be updated as new features are implemented.
+
+## Purpose
+
+The goal of this project is to learn by building, testing, and improving a real-time web application step by step.
