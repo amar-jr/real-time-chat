@@ -3,18 +3,25 @@ const cors = require("cors");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 
+const messages = [];
+
 const app = express();
 const server = createServer(app);
 
 const allowedOrigins = [
   "http://localhost:5173",
   "https://real-time-chat-ten-delta.vercel.app",
-  "https://real-time-chat-rg2cfal81-personal-project-5e38.vercel.app",
 ];
+
+const previewPattern =
+  /^https:\/\/real-time-chat-[a-z0-9]+-personal-project-5e38\.vercel\.app$/;
 
 function checkOrigin(origin, callback) {
   if (!origin) return callback(null, true);
-  return callback(null, allowedOrigins.includes(origin));
+  if (allowedOrigins.includes(origin) || previewPattern.test(origin)) {
+    return callback(null, true);
+  }
+  return callback(null, false);
 }
 
 const io = new Server(server, {
