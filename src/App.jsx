@@ -1,5 +1,7 @@
+const SERVER_URL = (
+  import.meta.env.VITE_SERVER_URL || "http://localhost:3000"
+).replace(/\/+$/, "");
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
 import {io} from "socket.io-client";
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
@@ -90,12 +92,12 @@ function App(){
   }, [messages,inputMessage]);
   
 
-  useEffect(()=>{
-    localStorage.setItem('messages', JSON.stringify(messages));
-    return()=>{
-      console.log("LocalStorage Chat Backup");
-    };
-  }, [messages]);
+  // useEffect(()=>{
+  //   localStorage.setItem('messages', JSON.stringify(messages));
+  //   return()=>{
+  //     console.log("LocalStorage Chat Backup");
+  //   };
+  // }, [messages]);
 
   useEffect(()=>{
     try{

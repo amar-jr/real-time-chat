@@ -1,28 +1,30 @@
+const express = require("express");
+const cors = require("cors");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
-const express= require("express");
-const cors=require("cors");
+const app = express();
+const server = createServer(app);
 
-const {createServer}=require('http');
-const {Server}=require("socket.io");
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://real-time-chat-ten-delta.vercel.app",
+  "https://real-time-chat-rg2cfal81-personal-project-5e38.vercel.app",
+];
 
-const app=express();
-const server= createServer(app);
+function checkOrigin(origin, callback) {
+  if (!origin) return callback(null, true);
+  return callback(null, allowedOrigins.includes(origin));
+}
 
-
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
-
-const io=new Server(server,{
-   cors:{
-      origin: CLIENT_URL
-   }
+const io = new Server(server, {
+  cors: {
+    origin: checkOrigin,
+    methods: ["GET", "POST"],
+  },
 });
 
-const messages=[];
-
-app.use(cors({
-  origin: CLIENT_URL
-}));
-
+app.use(cors({ origin: checkOrigin }));
 app.use(express.json());
 
 // Socket.IO connection handling
