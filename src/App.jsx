@@ -1,3 +1,5 @@
+
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
 import {io} from "socket.io-client";
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
@@ -30,7 +32,7 @@ function App(){
   const [isLoading, setIsLoading]=useState(true);
 
   // user
-const [userId, setUserId] = useState(() => {
+  const [userId, setUserId] = useState(() => {
   const savedId = localStorage.getItem("chatUserId");
 
   if (savedId) return savedId;
@@ -40,7 +42,7 @@ const [userId, setUserId] = useState(() => {
   return newId;
 });
 
-const [username, setUsername] = useState(() => {
+  const [username, setUsername] = useState(() => {
   const savedName = localStorage.getItem("chatUsername");
 
   if (savedName) return savedName;
@@ -98,7 +100,7 @@ const [username, setUsername] = useState(() => {
   useEffect(()=>{
     try{
       const startTime=Date.now();
-      fetch("http://localhost:3000/api/messages").then((response)=>{
+      fetch(`${SERVER_URL}/api/messages`).then((response)=>{
         const statusCode=response.status;
         if(!response.ok){
           throw new Error("Failed to Fetch Messages");
@@ -138,7 +140,7 @@ const [username, setUsername] = useState(() => {
   }, []);
 
   useEffect(()=>{
-    const socket=io("http://localhost:3000");
+    const socket=io(SERVER_URL);
 
     socket.on("newMessage", (newMessage)=>{
       setMessages((prevMessages)=>{
@@ -154,7 +156,7 @@ const [username, setUsername] = useState(() => {
   async function testPostReq(){
     let success=true; // this is just for not clearing inputMessage if there is some error in addMessage function
     try{
-      const response= await fetch("http://localhost:3000/api/messages", {
+      const response= await fetch(`${SERVER_URL}/api/messages`, {
         method:"POST",
         headers:{
           "Content-Type":"application/json"
