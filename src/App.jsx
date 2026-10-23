@@ -4,7 +4,6 @@ import './App.css'
 
 import Welcome from './components/welcome.jsx'
 import Message from './components/Message.jsx'
-import messageData from './data/mockData.js' // just for practice
 
 function App(){
   // states
